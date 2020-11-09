@@ -25,6 +25,10 @@ def root(x, i = 2):  # i root of x
     return (x ** (1 / i))
 
 
+def sigma(n, k, i = 1):  # sum of numbers through n to k (i is the amount of increase between each number)
+    return (n + k) * (n - k + i) / (2 * i)
+
+
 def factorial(x):  # calculates factoral, duh!
     f, i = 1, 1
     while i <= x:
@@ -63,7 +67,7 @@ def secondDegree(a, b, c):  # makes a list that includes x1 and x2
 
 def circleArea(r, piLen = 2):  # a circle's area (piLen is digits after point)
     newPi = round(pi, piLen)
-    return newPi * (r ** 2)
+    return newPi * square(r)
 
 
 def circleCircum(r, piLen = 2):  # a cirle's circumference (piLen is digits after point)
@@ -93,13 +97,13 @@ def spheresVolume(r, piLen = 2):  # calculates sphere's volume
     # -------------------
     #         3
     newPi = round(pi, piLen)
-    return 4 * newPi * (r ** 3) / 3
+    return 4 * newPi * cube(r) / 3
 
 
 def cylinderVolume(r, h, piLen = 2):  # calculates volume of the cylinder
     # pi * h * (r ** 2)
     newPi = round(pi, piLen)
-    return newPi * h * (r ** 2)
+    return newPi * h * square(r)
 
 
 def ellipseCircum(a, b, piLen = 2):  # calculates circumference of the ellipse, which is messy
@@ -109,7 +113,7 @@ def ellipseCircum(a, b, piLen = 2):  # calculates circumference of the ellipse, 
     #        2
     # )
     newPi = round(pi, piLen)
-    inSqrt = ((a ** 2) + (b ** 2)) / 2
+    inSqrt = (square(a) + square(b)) / 2
     return 2 * newPi * sqrt(inSqrt)
 
 
@@ -122,7 +126,7 @@ def log(x, base = e):  # logarithm, base is optional (base = e)
     return math.log(x, base)
 
 def ln(x):  # ln logarithm, base is e
-    return math.log(x, e)
+    return log(x)
 
 def log10(x):  # 10 based logarithm
     return math.log10(x)
@@ -184,11 +188,11 @@ def standardDevitation(list):  # calculates the list's standard devitation
 
 
 ## bignum / litnum = goldrat
-def shortGold(x):  # the giving nuber is the little one, it gives you the big one
+def bigGold(x):  # the giving nuber is the little one, it gives you the big one
     return x * goldenRatio
 
 
-def longGold(x):  # the giving nuber is the big one, it gives you the little one
+def littleGold(x):  # the giving nuber is the big one, it gives you the little one
     return x / goldenRatio
 
 
@@ -216,18 +220,6 @@ def primeDivisiors(x):  # makes a list with that numbers all prime factors
     return factors
 
 
-def distance(a, b, c, d):  # distance from a,b location to c,d location
-    x = absoluteValue(a - c)
-    y = absoluteValue(b - d)
-    return pyth(x, y)
-
-def radian(a):  # turns degree to radian
-    return a * pi / 180
-
-def degree(a):
-    return 180 * a / pi
-
-
 def ceil(x):  # Return the ceiling of x as integer, the smallest integer value greater than or equal to x
     if x % 1 != 0:
         x = x - (x % 1) + 1
@@ -237,6 +229,7 @@ def floor(x):
     return int(x)
 
 # -----------------------------------------------
+
 
 def gcd(a, *b):  # greatest common divisor
     divs = primeDivisiors(a)
@@ -255,7 +248,6 @@ def gcd(a, *b):  # greatest common divisor
     
     return int(x)
 
-# -----------------------------------------------
 
 def hcf(a, *b):  # highest common factor
     bs = []
@@ -272,5 +264,93 @@ def hcf(a, *b):  # highest common factor
     
     return a * bf / x
 
+
 # -----------------------------------------------
+# -----------TRIGONOMETRIC FUNCTIONS-------------
+
+
+def distance(a, b, c, d):  # distance from a,b location to c,d location
+    x = absoluteValue(a - c)
+    y = absoluteValue(b - d)
+    return pyth(x, y)
+
+# -----------------------------------------------------
+def radian(a):  # turns degree to radian
+    return a * pi / 180
+
+def degree(a):
+    return 180 * a / pi
+
+def smallRadian(a):  # makes radian smaller but equal. example:  smallRadian(10) = 3.7168146928204138
+    return radian(degree(a) % 360)
+# -----------------------------------------------------
+
+def sin(x):  # sinus function (input must be radiant)
+    x = smallRadian(x)
+    s = 0
+    for n in range(0, 51):
+        s += ((-1) ** n) * (x ** (2*n + 1)) / factorial(2*n + 1)
+    return round(s, 12)
+
+def cos(x):  # cosinus function (input must be radiant)
+    x = smallRadian(x)
+    c = 0
+    for n in range(0, 51):
+        c += ((-1) ** n) * (x ** (2*n)) / factorial(2*n)
+    
+    return round(c, 12)
+
+def tan(x):  # tangent function
+    return round(sin(x) / cos(x), 12)
+
+def cot(x):  # cotangent function
+    return round(cos(x) / sin(x), 12)
+
+def sec(x):  # secant function
+    return round(1 / cos(x), 12)
+
+def cosec(x):  # cosecant function
+    return round(1 / sin(x), 12)
+
+
+# ----------HYPERBOLIC FUNCTIONS-----------
+
+
+def sinh(x):  # sinh function
+    return round((exp(x) - exp(-x)) / 2, 12)
+
+def cosh(x):  # cosh function
+    return round((exp(x) + exp(-x)) / 2, 12)
+
+def tanh(x):  # tanh function
+    up = exp(x) - exp(-x)
+    down = exp(x) + exp(-x)
+    return round(up / down, 12)
+
+def coth(x):  # coth function
+    up = exp(x) + exp(-x)
+    down = exp(x) - exp(-x)
+    return round(up / down, 12)
+
+def sech(x):  # sech function
+    return round(2 / (exp(x) + exp(-x)), 12)
+
+def cosech(x):  # cosech function
+    return round(2 / (exp(x) - exp(-x)), 12)
+
+
+# -------------all ARCs-----------------
+
+
+def arcsinh(x):  # arcsinh function
+    return round(ln(x + sqrt(square(x) + 1)), 12)
+
+def arccosh(x):  # arccosh function
+    return round(ln(x + sqrt(square(x) - 1)), 12)
+
+def arcsech(x):  # arcsech function
+    return round(ln((1 / x) + sqrt((1 / square(x)) - 1)), 12)
+
+def arccosh(x):  # arccosh function
+    return round(ln((1 / x) + sqrt((1 / square(x)) + 1)), 12)
 

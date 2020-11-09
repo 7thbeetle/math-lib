@@ -222,10 +222,10 @@ def distance(a, b, c, d):  # distance from a,b location to c,d location
     return pyth(x, y)
 
 def radian(a):  # turns degree to radian
-    return a / pi
+    return a * pi / 180
 
 def degree(a):
-    return a * pi
+    return 180 * a / pi
 
 
 def ceil(x):  # Return the ceiling of x as integer, the smallest integer value greater than or equal to x

@@ -31,7 +31,7 @@ def factorial(x):  # calculates factoral, duh!
         f *= i
         i += 1
     if x == 0:
-        f = 0
+        f = 1
     if x < 0:
         raise ArithmeticError
     return int(f)

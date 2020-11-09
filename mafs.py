@@ -5,7 +5,7 @@ def square(i):  # square of a number
     return (i ** 2)
 
 def cube(i):  # cube of a number
-    return (i ** 2)
+    return (i ** 3)
 
 def sqrt(i):  # square root of a number
     return (i ** 0.5)

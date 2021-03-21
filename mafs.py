@@ -1,6 +1,7 @@
 pi = 3.141592653589793
 e = 2.718281828459045
 
+
 def square(i):  # square of a number
     return (i ** 2)
 
@@ -10,9 +11,6 @@ def cube(i):  # cube of a number
 def sqrt(i):  # square root of a number
     return (i ** 0.5)
 
-def exp(i):  # i power of e
-    return e ** i
-
 
 goldenRatio = round((1 + sqrt(5)) / 2, 10)
 # golden ratio ~= 1,61803
@@ -21,12 +19,15 @@ goldenRatio = round((1 + sqrt(5)) / 2, 10)
 #     2
 
 
+def exp(i):  # i power of e
+    return e ** i
+
 def root(x, i = 2):  # i root of x
     return (x ** (1 / i))
 
 
 def sigma(n, k, i = 1):  # sum of numbers through n to k (i is the amount of increase between each number)
-    return (n + k) * (n - k + i) / (2 * i)
+    return (n + k) * (k - n + i) / (2 * i)
 
 
 def factorial(x):  # calculates factoral, duh!
@@ -53,9 +54,9 @@ def isPrime(n):  # checks if a number is a Prime number or not
     return prime
 
 
-def secondDegree(a, b, c):  # makes a list that includes x1 and x2
+def secondDegree(a, b, c):  # quadratic formula
     sq = sqrt(square(b) - (4 * a * c))
-    xFirst = ((b * -1) + sq) / 2 * a
+    xFirst = (sq - b) / 2 * a
     xSecond = ((b * -1) - sq) / 2 * a
 
     # ((b * -1) +- sq
@@ -73,6 +74,17 @@ def circleArea(r, piLen = 2):  # a circle's area (piLen is digits after point)
 def circleCircum(r, piLen = 2):  # a cirle's circumference (piLen is digits after point)
     newPi = round(pi, piLen)
     return 2 * newPi * r
+
+
+def ellipseCircum(a, b, piLen = 2):  # calculates circumference of the ellipse, which is messy
+    # 2pi * sqrt(
+    #   (a**2 + b**2)
+    # -----------------
+    #        2
+    # )
+    newPi = round(pi, piLen)
+    inSqrt = (square(a) + square(b)) / 2
+    return 2 * newPi * sqrt(inSqrt)
 
 
 def fibonacci(t):  # t fibonacci numbers in a list
@@ -106,16 +118,15 @@ def cylinderVolume(r, h, piLen = 2):  # calculates volume of the cylinder
     return newPi * h * square(r)
 
 
-def ellipseCircum(a, b, piLen = 2):  # calculates circumference of the ellipse, which is messy
-    # 2pi * sqrt(
-    #   (a**2 + b**2)
-    # -----------------
-    #        2
-    # )
+def coneVolume(r, h, piLen = 2):  # calculates volume of the cone
+    # pi * (r ** 2) * h / 3
     newPi = round(pi, piLen)
-    inSqrt = (square(a) + square(b)) / 2
-    return 2 * newPi * sqrt(inSqrt)
+    return newPi * square(r) * h / 3
 
+
+def pyramidVolume(a, b, h):  # calculates volume of the pyramid
+    # a * b * h / 3
+    return a * b * h / 3
 
 # -----------------------------------------------
 
@@ -278,7 +289,7 @@ def distance(a, b, c, d):  # distance from a,b location to c,d location
 def radian(a):  # turns degree to radian
     return a * pi / 180
 
-def degree(a):
+def degree(a):  # turns radian to degree
     return 180 * a / pi
 
 def smallRadian(a):  # makes radian smaller but equal. example:  smallRadian(10) = 3.7168146928204138
@@ -346,11 +357,36 @@ def arcsinh(x):  # arcsinh function
     return round(ln(x + sqrt(square(x) + 1)), 12)
 
 def arccosh(x):  # arccosh function
+    if x <= 1:
+        raise ArithmeticError
     return round(ln(x + sqrt(square(x) - 1)), 12)
 
+def arctanh(x):  # arctanh function
+    if x == 1:
+        raise ArithmeticError
+    return round(ln((1 + x) / (1 - x)) / 2, 12)
+
+def arccoth(x):  # arccoth function
+    if x == 1:
+        raise ArithmeticError
+    return round(ln((1 + x) / (1 - x)) / 2, 12)
+
 def arcsech(x):  # arcsech function
+    if x == 0:
+        raise ArithmeticError
     return round(ln((1 / x) + sqrt((1 / square(x)) - 1)), 12)
 
-def arccosh(x):  # arccosh function
+def arccsch(x):  # arccscsh function
+    if x == 0:
+        raise ArithmeticError
     return round(ln((1 / x) + sqrt((1 / square(x)) + 1)), 12)
+
+
+
+
+
+
+
+
+
 

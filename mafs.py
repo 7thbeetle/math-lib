@@ -1,7 +1,3 @@
-pi = 3.141592653589793
-e = 2.718281828459045
-
-
 def square(i):  # square of a number
     return (i ** 2)
 
@@ -11,24 +7,14 @@ def cube(i):  # cube of a number
 def sqrt(i):  # square root of a number
     return (i ** 0.5)
 
-
-goldenRatio = round((1 + sqrt(5)) / 2, 10)
-# golden ratio ~= 1,61803
-# sqrt(5) + 1
-# ----------
-#     2
-
+def root(x, i = 2):  # i root of x
+    return (x ** (1 / i))
 
 def exp(i):  # i power of e
     return e ** i
 
-def root(x, i = 2):  # i root of x
-    return (x ** (1 / i))
-
-
 def sigma(n, k, i = 1):  # sum of numbers through n to k (i is the amount of increase between each number)
     return (n + k) * (k - n + i) / (2 * i)
-
 
 def factorial(x):  # calculates factoral, duh!
     f, i = 1, 1
@@ -40,6 +26,21 @@ def factorial(x):  # calculates factoral, duh!
     if x < 0:
         raise ArithmeticError
     return int(f)
+
+
+# ----------------------------------------------------------------
+
+pi = 3.141592653589793
+
+e = 2.718281828459045
+
+goldenRatio = round((1 + sqrt(5)) / 2, 10)
+# golden ratio ~= 1,61803
+# sqrt(5) + 1
+# ----------
+#     2
+
+# ----------------------------------------------------------------
 
 
 def isPrime(n):  # checks if a number is a Prime number or not
@@ -76,6 +77,11 @@ def circleCircum(r, piLen = 2):  # a cirle's circumference (piLen is digits afte
     return 2 * newPi * r
 
 
+def ellipseArea(a, b, piLen = 2):  # a ellipse's area (piLen is digits after point)
+    newPi = round(pi, piLen)
+    return newPi * a * b
+
+
 def ellipseCircum(a, b, piLen = 2):  # calculates circumference of the ellipse, which is messy
     # 2pi * sqrt(
     #   (a**2 + b**2)
@@ -105,11 +111,15 @@ def fibonacci(t):  # t fibonacci numbers in a list
 
 
 def spheresVolume(r, piLen = 2):  # calculates sphere's volume
-    #  4 * pi * (r ** 3)
-    # -------------------
-    #         3
+    #  4 * pi * (r ** 3) / 3
     newPi = round(pi, piLen)
     return 4 * newPi * cube(r) / 3
+
+
+def ellipsoidVolume(a, b, c, piLen = 2):  # calculates ellipsoid's volume
+    #  4 * pi * a * b * c / 3
+    newPi = round(pi, piLen)
+    return 4 * newPi * a * b * c / 3
 
 
 def cylinderVolume(r, h, piLen = 2):  # calculates volume of the cylinder
@@ -127,6 +137,7 @@ def coneVolume(r, h, piLen = 2):  # calculates volume of the cone
 def pyramidVolume(a, b, h):  # calculates volume of the pyramid
     # a * b * h / 3
     return a * b * h / 3
+
 
 # -----------------------------------------------
 
@@ -186,7 +197,7 @@ def avarage(list):  # calculates avarage of the giving list
     top = 0
     for i in list:
         top += i
-    return top / len(list)
+    return round(top / len(list), 8)
 
 
 def standardDevitation(list):  # calculates the list's standard devitation
@@ -213,8 +224,8 @@ def totalGold(total):  # the giving one is sum of big one and little one, it giv
     return [round(little, 10), round(big, 10)]
 
 
-def listPrimes(b):  # makes a list of prime numbers between a and b
-    between = range(1, b)
+def listPrimes(a, b):  # makes a list of prime numbers between a and b
+    between = range(a, b)
     primes = []
     for i in between:
         if isPrime(i) == True:
@@ -239,45 +250,10 @@ def ceil(x):  # Return the ceiling of x as integer, the smallest integer value g
 def floor(x):
     return int(x)
 
-# -----------------------------------------------
-
-
-def gcd(a, *b):  # greatest common divisor
-    divs = primeDivisiors(a)
-    temp = []
-    x = 1
-    for each in b:
-        for prime in divs:
-            if each % prime == 0:
-                each //= prime
-                temp.append(prime)
-        divs = temp
-        temp = []
-    
-    for i in divs:
-        x *= i
-    
-    return int(x)
-
-
-def hcf(a, *b):  # highest common factor
-    bs = []
-    bf = 1
-    for i in b:
-        bs.append(i)
-    
-    for i in bs:
-        bf *= i
-    
-    x = a
-    for i in b:
-        x = gcd(x, i)
-    
-    return a * bf / x
-
 
 # -----------------------------------------------
 # -----------TRIGONOMETRIC FUNCTIONS-------------
+# -----------------------------------------------
 
 
 def distance(a, b, c, d):  # distance from a,b location to c,d location
